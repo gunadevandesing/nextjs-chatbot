@@ -5,7 +5,7 @@ import MarkdownIt from "markdown-it";
 
 export default async function handler(req, res) {
   const imgData = imageString;
-  const promptMessage = "What is in the image?";
+  const promptMessage = req.body.message || "What is NextJs?";
   const contents = [
     new HumanMessage({
       content: [
@@ -13,10 +13,10 @@ export default async function handler(req, res) {
           type: "text",
           text: promptMessage,
         },
-        {
-          type: "image_url",
-          image_url: { url: imgData },
-        },
+        // {
+        //   type: "image_url",
+        //   image_url: { url: imgData },
+        // },
       ],
     }),
   ];

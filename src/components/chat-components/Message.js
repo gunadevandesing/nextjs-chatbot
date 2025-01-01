@@ -8,10 +8,20 @@ const Message = ({ message }) => {
         src={message.avatar}
         alt="user avatar"
       /> */}
-      <div className="chat-bubble__right">
-        {/* <p className="user-name">{message.name}</p> */}
-        <p className="user-message">{message.text}</p>
-      </div>
+      {message.name === "Loader" ? (
+        <div>
+          <p className="user-name">{message.name}</p>
+          <p className="user-message">{message.text}</p>
+        </div>
+      ) : (
+        <div>
+          <p className="user-name">{message.name}</p>
+          <p
+            className="user-message"
+            dangerouslySetInnerHTML={{ __html: message.text }}
+          ></p>
+        </div>
+      )}
     </div>
   );
 };

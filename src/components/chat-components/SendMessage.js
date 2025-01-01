@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-const SendMessage = ({ scroll }) => {
+const SendMessage = ({ scroll, addMessage, loading }) => {
   const [message, setMessage] = useState("");
 
   const sendMessage = async (event) => {
@@ -11,8 +11,8 @@ const SendMessage = ({ scroll }) => {
       return;
     }
 
+    await addMessage(message);
     setMessage("");
-    scroll.current.scrollIntoView({ behavior: "smooth" });
   };
   return (
     <form onSubmit={(event) => sendMessage(event)} className="send-message">
@@ -28,7 +28,9 @@ const SendMessage = ({ scroll }) => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button type="submit">Send</button>
+      <button disabled={loading} type="submit">
+        Send
+      </button>
     </form>
   );
 };
